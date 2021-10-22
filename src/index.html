@@ -2,12 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AppPrueba</title>
+  <title>BEMACK | Centro Odontologico</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"> -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" ></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+  <!-- <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> -->
+  <!-- <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script> -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+  <script>
+      $(document).ready(function() {
+        $('#tb-precios').DataTable();
+        ClassicEditor
+            .create( document.querySelector( '#txt-area' ) )
+            .catch( error => {
+            console.error( error );
+        } );
+        $('#nosotros').click();
+      } );
+
+  </script>
+  
+  <style>
+    #bg-animado{
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='610' preserveAspectRatio='none' viewBox='0 0 1440 610'%3e%3cg mask='url(%26quot%3b%23SvgjsMask2694%26quot%3b)' fill='none'%3e%3cpath d='M1293.3400000000001 644.3499999999999 L1157.14 662.9L1280.4396758375744 708.8246758375743z' stroke='rgba(227%2c 72%2c 34%2c 0.64)' stroke-width='1.84' stroke-dasharray='2%2c 2'%3e%3c/path%3e%3cpath d='M1078.49 27.17L1066.04 30.16 1060.39 18.67 1047.94 21.67 1042.28 10.18 1029.83 13.18 1024.17 1.69M1081.89 19.92L1069.44 22.92 1063.78 11.43 1051.33 14.43 1045.67 2.94 1033.22 5.94 1027.57-5.55M1085.29 12.68L1072.84 15.68 1067.18 4.19 1054.73 7.19 1049.07-4.3 1036.62-1.3 1030.96-12.79' stroke='rgba(227%2c 72%2c 34%2c 0.64)' stroke-width='2.01'%3e%3c/path%3e%3ccircle r='50.833333333333336' cx='935.76' cy='64.72' fill='rgba(21%2c 142%2c 164%2c 0.6)'%3e%3c/circle%3e%3crect width='324' height='324' clip-path='url(%26quot%3b%23SvgjsClipPath2695%26quot%3b)' x='445.96' y='157.85' fill='url(%23SvgjsPattern2696)' transform='rotate(81.12%2c 607.96%2c 319.85)'%3e%3c/rect%3e%3cpath d='M1193.75 148.94L1201.89 158.82 1194.04 168.93 1202.18 178.82 1194.32 188.93 1202.46 198.82 1194.6 208.93M1185.75 149.05L1193.89 158.93 1186.04 169.05 1194.18 178.93 1186.32 189.04 1194.46 198.93 1186.6 209.04M1177.75 149.16L1185.89 159.05 1178.04 169.16 1186.18 179.05 1178.32 189.16 1186.46 199.04 1178.6 209.16' stroke='rgba(21%2c 142%2c 164%2c 0.6)' stroke-width='2.61' stroke-dasharray='4%2c 4'%3e%3c/path%3e%3cpath d='M881.71 185.04a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM865.71 184.6a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31zM849.72 184.16a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM833.73 183.72a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM914.14 169.93a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM898.14 169.49a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31zM882.15 169.05a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM866.15 168.61a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31zM946.56 154.82a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31zM930.57 154.38a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31zM914.58 153.94a5.6 5.6 0 1 0-11.2-0.31 5.6 5.6 0 1 0 11.2 0.31zM898.58 153.5a5.6 5.6 0 1 0-11.19-0.31 5.6 5.6 0 1 0 11.19 0.31z' stroke='rgba(21%2c 142%2c 164%2c 0.6)' stroke-width='1' stroke-dasharray='2%2c 2'%3e%3c/path%3e%3crect width='357.28' height='357.28' clip-path='url(%26quot%3b%23SvgjsClipPath2697%26quot%3b)' x='1157.04' y='192.84' fill='url(%23SvgjsPattern2698)' transform='rotate(20.86%2c 1335.68%2c 371.48)'%3e%3c/rect%3e%3ccircle r='68.6872396837418' cx='23.18' cy='331.41' fill='rgba(21%2c 142%2c 164%2c 0.6)'%3e%3c/circle%3e%3crect width='60' height='60' clip-path='url(%26quot%3b%23SvgjsClipPath2699%26quot%3b)' x='905.13' y='556.61' fill='url(%23SvgjsPattern2700)' transform='rotate(77.37%2c 935.13%2c 586.61)'%3e%3c/rect%3e%3crect width='349.44' height='349.44' clip-path='url(%26quot%3b%23SvgjsClipPath2701%26quot%3b)' x='990.51' y='352.28' fill='url(%23SvgjsPattern2702)' transform='rotate(174.54%2c 1165.23%2c 527)'%3e%3c/rect%3e%3cpath d='M489.92 293.5L502.7 294.19 504.85 306.81 517.64 307.49 519.78 320.12 532.57 320.8 534.71 333.43' stroke='rgba(21%2c 142%2c 164%2c 0.6)' stroke-width='1' stroke-dasharray='2%2c 2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask2694'%3e%3crect width='1440' height='610' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cpattern x='0' y='0' width='324' height='6' patternUnits='userSpaceOnUse' id='SvgjsPattern2696'%3e%3crect width='324' height='3' x='0' y='0' fill='rgba(227%2c 72%2c 34%2c 0.64)'%3e%3c/rect%3e%3crect width='324' height='3' x='0' y='3' fill='rgba(0%2c 0%2c 0%2c 0)'%3e%3c/rect%3e%3c/pattern%3e%3cclipPath id='SvgjsClipPath2695'%3e%3ccircle r='81' cx='607.96' cy='319.85'%3e%3c/circle%3e%3c/clipPath%3e%3cpattern x='0' y='0' width='357.28' height='12.76' patternUnits='userSpaceOnUse' id='SvgjsPattern2698'%3e%3crect width='357.28' height='6.38' x='0' y='0' fill='rgba(227%2c 72%2c 34%2c 0.64)'%3e%3c/rect%3e%3crect width='357.28' height='6.38' x='0' y='6.38' fill='rgba(0%2c 0%2c 0%2c 0)'%3e%3c/rect%3e%3c/pattern%3e%3cclipPath id='SvgjsClipPath2697'%3e%3ccircle r='89.32' cx='1335.68' cy='371.48'%3e%3c/circle%3e%3c/clipPath%3e%3cpattern x='0' y='0' width='60' height='6' patternUnits='userSpaceOnUse' id='SvgjsPattern2700'%3e%3crect width='60' height='3' x='0' y='0' fill='rgba(21%2c 142%2c 164%2c 0.6)'%3e%3c/rect%3e%3crect width='60' height='3' x='0' y='3' fill='rgba(0%2c 0%2c 0%2c 0)'%3e%3c/rect%3e%3c/pattern%3e%3cclipPath id='SvgjsClipPath2699'%3e%3ccircle r='15' cx='935.13' cy='586.61'%3e%3c/circle%3e%3c/clipPath%3e%3cpattern x='0' y='0' width='349.44' height='8.32' patternUnits='userSpaceOnUse' id='SvgjsPattern2702'%3e%3crect width='349.44' height='4.16' x='0' y='0' fill='rgba(21%2c 142%2c 164%2c 0.6)'%3e%3c/rect%3e%3crect width='349.44' height='4.16' x='0' y='4.16' fill='rgba(0%2c 0%2c 0%2c 0)'%3e%3c/rect%3e%3c/pattern%3e%3cclipPath id='SvgjsClipPath2701'%3e%3ccircle r='87.36' cx='1165.23' cy='527'%3e%3c/circle%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+    }
+  </style>
 </head>
-<body>
+<body id="bg-animado">
   <app-root></app-root>
 </body>
 </html>
