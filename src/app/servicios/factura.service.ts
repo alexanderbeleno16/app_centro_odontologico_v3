@@ -22,6 +22,6 @@ export class FacturaService {
   } 
   
   updateFac(id:number, datos_nuevos:any) {
-    return this.http.put(`${this.url}update_contact/factura/`+id, datos_nuevos);
+    return this.http.put(`http://127.0.0.1:3000/update_contact/factura/`+id, datos_nuevos);
   } 
 }

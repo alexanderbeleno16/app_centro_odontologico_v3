@@ -48,8 +48,8 @@ export class SectionTablasComponent implements OnInit {
       this.formConsulta=this._builder.group({
         con_fecha: ['', [Validators.required]],
         con_descripcion: ['', [Validators.required]],
-        con_odonId: ['', [Validators.required]],
-        con_paciId: ['', [Validators.required]]
+        con_paciId: ['', [Validators.required]],
+        con_odonId: ['', [Validators.required]]
       })
 
       this.formtratamiento=this._builder.group({
@@ -90,7 +90,6 @@ export class SectionTablasComponent implements OnInit {
     }
 
     nuevocon={
-      // conid: null,
       conFecha: null,
       conDescri: null,
       paciId: null,
@@ -189,7 +188,6 @@ export class SectionTablasComponent implements OnInit {
   insertaCon(value:any){
 
     this.nuevocon={
-      // conid: value.con_id,
       conFecha: value.con_fecha,
       conDescri: value.con_descripcion,
       paciId: value.con_paciId,
@@ -316,7 +314,7 @@ export class SectionTablasComponent implements OnInit {
       console.log(datos)
       alert("contacto actualizado")
       this.formPaci.reset()
-      // this.pacienteService.retornarPas()
+      /* this.pacienteService.retornarPas() */
       this.llamarPaci();
     });
   }
