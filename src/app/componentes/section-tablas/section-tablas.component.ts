@@ -190,8 +190,8 @@ export class SectionTablasComponent implements OnInit {
     this.nuevocon={
       conFecha: value.con_fecha,
       conDescri: value.con_descripcion,
-      paciId: value.con_paciId,
-      odonId: value.con_odonId
+      odonId: value.con_odonId,
+      paciId: value.con_paciId
     }
     
     this.consultaService.insertaCon(this.nuevocon).subscribe(datos => {
