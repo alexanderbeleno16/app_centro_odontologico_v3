@@ -279,8 +279,8 @@ export class SectionTablasComponent implements OnInit {
     this.formConsulta.setValue({
       con_fecha: con_edit['Fecha'],
       con_descripcion: con_edit['Descripcion'],
-      con_paciId: con_edit['IdPaciente'],
-      con_odonId: con_edit['IdOdontologo']
+      con_odonId: con_edit['IdOdontologo'],
+      con_paciId: con_edit['IdPaciente']
     });
   }
 
