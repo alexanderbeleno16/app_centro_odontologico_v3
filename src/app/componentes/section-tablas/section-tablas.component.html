@@ -22,7 +22,7 @@
                     <h1 class="fw-bold mb-4" style="color: #e34822;">Pacientes registrados</h1>
                 </div>
                 <div class="col-12 mb-3">
-                    <form action="">
+                    <form [formGroup]="formPaci">
                         <!-- TABLA PACIENTE -->
                         <div class="col-12 " id="div-paciente" >
                             <!-- formulario -->
@@ -31,14 +31,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
-                                                <input id="paci_id" type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                <input formControlName="paciId" type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="paci_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="paci_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -46,14 +46,14 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="paci_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="paci_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="paci_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="paci_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,14 +61,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
-                                                <input id="paci_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                <input formControlName="paci_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="paci_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="paci_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,16 +76,16 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="paci_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="paci_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-around">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <button type="submit" class="btn btn-success col-12" id="btn-crear-paciente"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
-                                                    </svg> Crear</button>
+                                                    <button (click)="insertaPac(formPaci.value)" class="btn btn-success col-12">
+                                                        Crear
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,8 +102,8 @@
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-warning col-12" id="btn_filtro_paciente">
-                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                        <button (click)="modificaPac(formPaci.value)" class="btn btn-warning col-12" id="btn_filtro_paciente">
+                                            <i class="bi bi-funnel"></i> Editar 
                                         </button>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <div class="col-12 text-center">
             
                     <div class="table table-responsive">
@@ -125,20 +125,26 @@
                                     <td>Edad</td>
                                     <td>Telefono</td>
                                     <td>Direccion</td>
+                                    <td>Correo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
                             <tbody class="">
-                                <tr *ngFor="let art of tPaciente">
+                                <tr *ngFor="let art of lista_paciente">
                                     <td>{{art.CC}}</td>
                                     <td>{{art.Nombre}}</td>
                                     <td>{{art.Apellido}}</td>
                                     <td>{{art.Edad}}</td>
-                                    <td>{{art.telefono}}</td>
                                     <td>{{art.direccion}}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary">Seleccionar</a>
-                                        <a class="btn btn-outline-danger">Eliminar</a>
+                                    <td>{{art.telefono}}</td>
+                                    <td>{{art.correo}}</td>
+                                    <td>{{art.Fecha}}</td>
+                                    <td>{{art.Estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarPac(art)" class="col-6 btn btn-outline-primary me-1">Seleccionar</a>
+                                        <a (click)="eliminarPac(art.CC)" class="col-5 btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -153,7 +159,7 @@
                     <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Odontologos registrados</h1>
                 </div>
                 <div class="col-12 mb-3">
-                    <form action="">
+                    <form [formGroup]="formOdon">
                         <!-- TABLA ODONTOLOGO -->
                         <div class="col-12 " id="div-odontologo" >
                             <!-- formulario -->
@@ -162,14 +168,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
-                                                <input type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required id="odon_id">
+                                                <input required type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"formControlName="odon_id">
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="odon_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="odon_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,14 +183,14 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="odon_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="odon_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="odon_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="odon_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -192,14 +198,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
-                                                <input id="odon_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                <input formControlName="odon_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="odon_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="odon_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,14 +213,14 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <input id="odon_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    <input formControlName="odon_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-around">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
-                                                    <button type="submit" class="btn btn-success col-12" id="btn-crear-odontologo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                    <button (click)="insertaOdo(formOdon.value)" type="submit" class="btn btn-success col-12" id="btn-crear-odontologo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                                         <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                                     </svg> Crear</button>
                                                 </div>
@@ -233,8 +239,8 @@
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-warning col-12" id="btn_filtro_odontologo" >
-                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                        <button (click)="modificaOdo(formOdon.value)" class="btn btn-warning col-12" id="btn_filtro_odontologo" >
+                                            <i class="bi bi-funnel"></i> Editar 
                                         </button>
                                     </div>
                                 </div>
@@ -255,6 +261,9 @@
                                     <td>Edad</td>
                                     <td>Telefono</td>
                                     <td>Direccion</td>
+                                    <td>correo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
@@ -266,9 +275,12 @@
                                     <td>{{art.Edad}}</td>
                                     <td>{{art.telefono}}</td>
                                     <td>{{art.direccion}}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary">Seleccionar</a>
-                                        <a class="btn btn-outline-danger">Eliminar</a>
+                                    <td>{{art.correo}}</td>
+                                    <td>{{art.Fecha}}</td>
+                                    <td>{{art.Estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarOdon(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarOdon(art.CC)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -283,30 +295,18 @@
                     <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Consultas registradas</h1>
                 </div>
                 <div class="col-12 mb-3">
-                    <form action="">
+                    <form [formGroup]="formConsulta">
                         <!-- TABLA CONSULTA -->
                         <div class="col-12" id="div-consulta" >
                             <!-- formulario -->
                             <div class="col-12 my-0 " id="tabla-consulta">                                
                                     <div class="row">
                                         <div class="col-6">
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <input id="con_id" type="number" class="form-control" placeholder="ID consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                                                </div>
-                                            </div>
                                             
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="con_fecha" type="date" class="form-control" placeholder="Fecha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="form-group">
-                                                    <div class="input-group mb-3">
-                                                        <input id="con_paciId" type="text" class="form-control" placeholder="identificacion paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="con_fecha" type="date" class="form-control" placeholder="Fecha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,21 +315,28 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="con_descripcion" type="text" class="form-control" placeholder="Descripcion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="con_descripcion" type="text" class="form-control" placeholder="Descripcion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="con_odonId" type="text" class="form-control" placeholder="identificacion odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="con_odonId" type="text" class="form-control" placeholder="identificacion odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="con_paciId" type="text" class="form-control" placeholder="identificacion paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-consulta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <button (click)="insertaCon(formConsulta.value)" type="submit" class="btn btn-success col-12" id="btn-crear-consulta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                                             <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                                         </svg> Crear</button>
                                                     </div>
@@ -348,8 +355,8 @@
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-warning col-12" id="btn_filtro_consulta">
-                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                        <button (click)="modificaCon(formConsulta.value)" class="btn btn-warning col-12" id="btn_filtro_consulta">
+                                            <i class="bi bi-funnel"></i> Editar 
                                         </button>
                                     </div>
                                 </div>
@@ -369,6 +376,8 @@
                                     <td>Descripcion</td>
                                     <td>CC paciente</td>
                                     <td>CC Odontologo</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
@@ -379,9 +388,11 @@
                                     <td>{{art.Descripcion}}</td>
                                     <td>{{art.IdPaciente}}</td>
                                     <td>{{art.IdOdontologo}}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary">Seleccionar</a>
-                                        <a class="btn btn-outline-danger">Eliminar</a>
+                                    <td>{{art.Fecha}}</td>
+                                    <td>{{art.Estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarCon(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarCon(art.ID)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -396,23 +407,18 @@
                     <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Facturas registradas</h1>
                 </div>
                 <div class="col-12 mb-3">
-                    <form action="">
+                    <form [formGroup]="formFactura">
                         <!-- TABLA factura -->
                         <div class="col-12 mb-3" id="div-factura" >
                             <!-- formulario -->
                             <div class="col-12 my-0 " id="tabla-paci2">
                                     <div class="row">
                                         <div class="col-6">
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <input type="number" id="fac_id" class="form-control" placeholder="ID Factura" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                                                </div>
-                                            </div>
                                             
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" id="fac_paciId" placeholder="ID Paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input type="text" class="form-control" formControlName="fac_paciId" placeholder="ID Paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -421,14 +427,21 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" id="fac_odoId" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input type="text" class="form-control" formControlName="fac_odoid" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" formControlName="fac_conId" placeholder="ID Consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-factura"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <button (click)="insertaFac(formFactura.value)" type="submit" class="btn btn-success col-12" id="btn-crear-factura"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                                             <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                                         </svg> Crear</button>
                                                     </div>
@@ -447,8 +460,8 @@
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-warning col-12" id="btn_filtro_factura">
-                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                        <button (click)="modificaFac(formFactura.value)" class="btn btn-warning col-12" id="btn_filtro_factura">
+                                            <i class="bi bi-funnel"></i> Editar 
                                         </button>
                                     </div>
                                 </div>
@@ -464,19 +477,25 @@
                             <thead>
                                 <tr>
                                     <td>ID</td>
-                                    <td>OdontologoID</td>
                                     <td>PacienteId</td>
+                                    <td>OdontologoID</td>
+                                    <td>ConsultaID</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of tFactura">
                                     <td>{{art.ID}}</td>
-                                    <td>{{art.OdontologoID}}</td>
                                     <td>{{art.PacienteId}}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary">Seleccionar</a>
-                                        <a class="btn btn-outline-danger">Eliminar</a>
+                                    <td>{{art.OdontologoID}}</td>
+                                    <td>{{art.ConsultaID}}</td>
+                                    <td>{{art.Fecha}}</td>
+                                    <td>{{art.Estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarFac(art)" class="btn btn-outline-primary col-5">Seleccionar</a>
+                                        <a (click)="eliminarFac(art.ID)" class="btn btn-outline-danger col-5">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -491,7 +510,7 @@
                     <h1 class="fw-bold mb-4  pt-3" style="color: #e34822;">Tratamientos registrados</h1>
                 </div>
                 <div class="col-12">
-                    <form action="">
+                    <form [formGroup]="formtratamiento" >
                          <!-- TABLA TRATAMIENTO -->
                         <div class="col-12 mb-3" id="div-tratamiento" >
                             <!-- formulario -->
@@ -499,15 +518,9 @@
                                     <div class="row">
                                         <div class="col-6 text-center">
                                             <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <input id="trata_id" type="number" class="form-control" placeholder="ID tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="trata_tipo" type="text" class="form-control" placeholder="Tipo de tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="trata_tipo" type="text" class="form-control" placeholder="Tipo de tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -515,7 +528,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="trata_paciId" type="text" class="form-control" placeholder="ID paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="trata_paciId" type="text" class="form-control" placeholder="ID paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -527,8 +540,8 @@
                                                         </button>
                                                     </div>
                                                     <div class="col-6">
-                                                        <button class="btn btn-warning col-12" id="btn_filtro_tratamiento">
-                                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                                        <button (click)="modificaTra(formtratamiento.value)" class="btn btn-warning col-12" id="btn_filtro_tratamiento">
+                                                            <i class="bi bi-funnel"></i> Editar 
                                                         </button>
                                                     </div>
                                                 </div>
@@ -539,7 +552,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="trata_descri" type="text" class="form-control" placeholder="Descripción" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="trata_descri" type="text" class="form-control" placeholder="Descripción" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -547,7 +560,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="trata_precio" type="text" class="form-control" placeholder="Precio" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="trata_precio" type="text" class="form-control" placeholder="Precio" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -555,7 +568,15 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input id="trata_odonId" type="text" class="form-control" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <input formControlName="trata_odonId" type="text" class="form-control" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <input formControlName="trata_conId" type="text" class="form-control" placeholder="ID Consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -563,7 +584,7 @@
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-tratamiento"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <button (click)="insertaTrara(formtratamiento.value)" type="submit" class="btn btn-success col-12" id="btn-crear-tratamiento"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                                             <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                                         </svg> Crear</button>
                                                     </div>
@@ -587,8 +608,11 @@
                                     <td>Tipo Tratamiento</td>
                                     <td>Descripcion</td>
                                     <td>Precio</td>
+                                    <td>PacienteID</td>
                                     <td>OdontologoID</td>
-                                    <td>PacienteId</td>
+                                    <td>ConsultaID</td>
+                                    <td>Fecha Registro</td>
+                                    <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
@@ -600,9 +624,12 @@
                                     <td>{{art.Precio}}</td>
                                     <td>{{art.IdPaciente}}</td>
                                     <td>{{art.IdOdontologo}}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary">Seleccionar</a>
-                                        <a class="btn btn-outline-danger">Eliminar</a>
+                                    <td>{{art.ConsultaID}}</td>
+                                    <td>{{art.Fecha}}</td>
+                                    <td>{{art.Estado}}</td>
+                                    <td class="d-flex justify-content-evenly">
+                                        <a (click)="seleccionarTra(art)" class="btn btn-outline-primary">Seleccionar</a>
+                                        <a (click)="eliminarTra(art.ID)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -612,19 +639,4 @@
                 </div>
             </div>
       </div>
-
-    
-
-
-    
-
-
-    
-
-
-    
-
-
-    
-
 </div>
