@@ -277,9 +277,9 @@ export class SectionTablasComponent implements OnInit {
   seleccionarFac(fac_edit:any){
     this.id_editar = fac_edit['id'];
     this.formFactura.setValue({
-      tra_select_paciente: fac_edit['idPaciente'],
-      tra_select_odontologo: fac_edit['idOdontologo'],
-      tra_select_consulta: fac_edit['idConsulta']
+      fac_select_paciente: fac_edit['idPaciente'],
+      fac_select_odontologo: fac_edit['idOdontologo'],
+      fac_select_consulta: fac_edit['idConsulta']
     });
   }
 
