@@ -119,7 +119,7 @@
                             id="tb-precios">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
+                                    <td>Identificación</td>
                                     <td>Nombre</td>
                                     <td>Apellido</td>
                                     <td>Edad</td>
@@ -133,18 +133,18 @@
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of lista_paciente">
-                                    <td>{{art.CC}}</td>
-                                    <td>{{art.Nombre}}</td>
-                                    <td>{{art.Apellido}}</td>
-                                    <td>{{art.Edad}}</td>
+                                    <td>{{art.cc}}</td>
+                                    <td>{{art.nombre}}</td>
+                                    <td>{{art.apellido}}</td>
+                                    <td>{{art.edad}}</td>
                                     <td>{{art.direccion}}</td>
                                     <td>{{art.telefono}}</td>
                                     <td>{{art.correo}}</td>
-                                    <td>{{art.Fecha}}</td>
-                                    <td>{{art.Estado}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
                                     <td class="d-flex justify-content-evenly">
                                         <a (click)="seleccionarPac(art)" class="col-6 btn btn-outline-primary me-1">Seleccionar</a>
-                                        <a (click)="eliminarPac(art.CC)" class="col-5 btn btn-outline-danger">Eliminar</a>
+                                        <a (click)="eliminarPac(art.id)" class="col-5 btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -255,7 +255,7 @@
                             id="tb-precios">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
+                                    <td>Identificacion</td>
                                     <td>Nombre</td>
                                     <td>Apellido</td>
                                     <td>Edad</td>
@@ -269,18 +269,18 @@
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of tOdontologo">
-                                    <td>{{art.CC}}</td>
-                                    <td>{{art.Nombre}}</td>
-                                    <td>{{art.Apellido}}</td>
-                                    <td>{{art.Edad}}</td>
+                                    <td>{{art.cc}}</td>
+                                    <td>{{art.nombre}}</td>
+                                    <td>{{art.apellido}}</td>
+                                    <td>{{art.edad}}</td>
                                     <td>{{art.telefono}}</td>
                                     <td>{{art.direccion}}</td>
                                     <td>{{art.correo}}</td>
-                                    <td>{{art.Fecha}}</td>
-                                    <td>{{art.Estado}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
                                     <td class="d-flex justify-content-evenly">
                                         <a (click)="seleccionarOdon(art)" class="btn btn-outline-primary">Seleccionar</a>
-                                        <a (click)="eliminarOdon(art.CC)" class="btn btn-outline-danger">Eliminar</a>
+                                        <a (click)="eliminarOdon(art.id)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -296,6 +296,8 @@
                 </div>
                 <div class="col-12 mb-3">
                     <form [formGroup]="formConsulta">
+                        <!-- <input type="hidden" formControlName="con_paciId_o">
+                        <input type="hidden" formControlName="con_odonId_o"> -->
                         <!-- TABLA CONSULTA -->
                         <div class="col-12" id="div-consulta" >
                             <!-- formulario -->
@@ -310,6 +312,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="con_select_paciente" class="form-select" required>
+                                                        <option value="0" selected>Seleccione el paciente</option>
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.nombre}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="con_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.nombre}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
@@ -319,7 +344,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
                                                         <input formControlName="con_odonId" type="text" class="form-control" placeholder="identificacion odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
@@ -332,7 +357,7 @@
                                                         <input formControlName="con_paciId" type="text" class="form-control" placeholder="identificacion paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
@@ -347,8 +372,7 @@
                                 
                             </div>
                             <div class="col-6 p-1">
-                                <div class="row">
-    
+                                <div class="row">    
                                     <div class="col-6">
                                         <button class="btn btn-primary col-12">
                                             <i class="bi bi-arrow-return-left"></i> Consultar todo 
@@ -371,7 +395,6 @@
                             id="tb-precios">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
                                     <td>fecha</td>
                                     <td>Descripcion</td>
                                     <td>CC paciente</td>
@@ -383,16 +406,15 @@
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of tConsulta">
-                                    <td>{{art.ID}}</td>
                                     <td>{{art.fecha}}</td>
-                                    <td>{{art.Descripcion}}</td>
-                                    <td>{{art.IdPaciente}}</td>
-                                    <td>{{art.IdOdontologo}}</td>
-                                    <td>{{art.Fecha}}</td>
-                                    <td>{{art.Estado}}</td>
+                                    <td>{{art.descripcion}}</td>
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fechaHora}}</td>
+                                    <td>{{art.estado}}</td>
                                     <td class="d-flex justify-content-evenly">
                                         <a (click)="seleccionarCon(art)" class="btn btn-outline-primary">Seleccionar</a>
-                                        <a (click)="eliminarCon(art.ID)" class="btn btn-outline-danger">Eliminar</a>
+                                        <a (click)="eliminarCon(art.id)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -413,8 +435,7 @@
                             <!-- formulario -->
                             <div class="col-12 my-0 " id="tabla-paci2">
                                     <div class="row">
-                                        <div class="col-6">
-                                            
+                                        <!-- <div class="col-6">                                            
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
@@ -422,22 +443,58 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
+                                        </div> -->
+                                        <div class="col-6">   
                                             <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el paciente</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_paciente" class="form-select" required>
+                                                        <!-- <option value="0" selected></option> -->
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.nombre}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                            <!-- <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control" formControlName="fac_odoid" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione el odontologo</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.nombre}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione la descripcion de la factura</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="fac_select_consulta" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tConsulta" value="{{art.id}}">{{art.descripcion}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control" formControlName="fac_conId" placeholder="ID Consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
@@ -476,26 +533,24 @@
                             id="tb-precios">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
-                                    <td>PacienteId</td>
-                                    <td>OdontologoID</td>
-                                    <td>ConsultaID</td>
+                                    <td>Idn. paciente</td>
+                                    <td>Idn. odontologo</td>
                                     <td>Fecha Registro</td>
+                                    <!-- <td>Descripcion</td>  -->
                                     <td>Estado</td>
                                     <td>Acciones</td>
                                 </tr>
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of tFactura">
-                                    <td>{{art.ID}}</td>
-                                    <td>{{art.PacienteId}}</td>
-                                    <td>{{art.OdontologoID}}</td>
-                                    <td>{{art.ConsultaID}}</td>
-                                    <td>{{art.Fecha}}</td>
-                                    <td>{{art.Estado}}</td>
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <!-- <td>{{art.descripcion}}</td>  -->
+                                    <td>{{art.estado}}</td>
                                     <td class="d-flex justify-content-evenly">
                                         <a (click)="seleccionarFac(art)" class="btn btn-outline-primary col-5">Seleccionar</a>
-                                        <a (click)="eliminarFac(art.ID)" class="btn btn-outline-danger col-5">Eliminar</a>
+                                        <a (click)="eliminarFac(art.id)" class="btn btn-outline-danger col-5">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -527,11 +582,22 @@
 
                                             <div class="form-group">
                                                 <div class="form-group">
+                                                    <span for="">Seleccione el paciente</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="tra_select_paciente" class="form-select" required>
+                                                        <!-- <option value="0" selected></option> -->
+                                                        <option *ngFor="let art of lista_paciente" value="{{art.id}}">{{art.nombre}}</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-group">
                                                     <div class="input-group mb-3">
                                                         <input formControlName="trata_paciId" type="text" class="form-control" placeholder="ID paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-12 p-1">
                                                 <div class="row">
                                                     <div class="col-6">
@@ -564,23 +630,37 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
+                                                <div class="form-group">
+                                                    <span for="">Seleccione la descripcion de la consulta</span><br>
+                                                    <div class="input-group mb-3">
+                                                        <select formControlName="tra_select_consulta" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tConsulta" value="{{art.id}}">{{art.descripcion}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
                                                         <input formControlName="trata_odonId" type="text" class="form-control" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
                                                 <div class="form-group">
+                                                    <span for="">Seleccione el odontologo</span><br>
                                                     <div class="input-group mb-3">
-                                                        <input formControlName="trata_conId" type="text" class="form-control" placeholder="ID Consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                                        <select formControlName="tra_select_odontologo" class="form-select" required>
+                                                            <!-- <option value="0" selected>Seleccione el odontologo</option> -->
+                                                            <option *ngFor="let art of tOdontologo" value="{{art.id}}">{{art.nombre}}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="row d-flex justify-content-around">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
@@ -604,13 +684,11 @@
                             id="tb-precios">
                             <thead>
                                 <tr>
-                                    <td>ID</td>
                                     <td>Tipo Tratamiento</td>
                                     <td>Descripcion</td>
                                     <td>Precio</td>
-                                    <td>PacienteID</td>
-                                    <td>OdontologoID</td>
-                                    <td>ConsultaID</td>
+                                    <td>Idn. Paciente</td>
+                                    <td>Idn. Odontologo</td>
                                     <td>Fecha Registro</td>
                                     <td>Estado</td>
                                     <td>Acciones</td>
@@ -618,18 +696,16 @@
                             </thead>
                             <tbody class="">
                                 <tr *ngFor="let art of tTrataminto">
-                                    <td>{{art.ID}}</td>
                                     <td>{{art.tipoTratamiento}}</td>
-                                    <td>{{art.Descripcion}}</td>
-                                    <td>{{art.Precio}}</td>
-                                    <td>{{art.IdPaciente}}</td>
-                                    <td>{{art.IdOdontologo}}</td>
-                                    <td>{{art.ConsultaID}}</td>
-                                    <td>{{art.Fecha}}</td>
-                                    <td>{{art.Estado}}</td>
+                                    <td>{{art.descripcion}}</td>
+                                    <td>{{art.precio}}</td>
+                                    <td>{{art.idPaciente}}</td>
+                                    <td>{{art.idOdontologo}}</td>
+                                    <td>{{art.fecha}}</td>
+                                    <td>{{art.estado}}</td>
                                     <td class="d-flex justify-content-evenly">
                                         <a (click)="seleccionarTra(art)" class="btn btn-outline-primary">Seleccionar</a>
-                                        <a (click)="eliminarTra(art.ID)" class="btn btn-outline-danger">Eliminar</a>
+                                        <a (click)="eliminarTra(art.id)" class="btn btn-outline-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>

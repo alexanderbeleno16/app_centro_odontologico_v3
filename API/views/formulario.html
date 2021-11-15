@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MI API - TABLAS FORMULARIO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.2/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    
+    
+    
+</head>
+<body>
+    
+    <!-- nav -->
+    <div class="col-12 shadow position sticky-top bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light mb-5">
+            <div class="container-fluid">
+              <a class="navbar-brand text-danger fw-bold ms-5" href="index.html"><img src="https://i.pinimg.com/originals/34/24/bc/3424bc004ef22d3c1857224e0c2822ba.png" height="60" width="60" alt=""> CENTRO ODONTOL&#211;GICO</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active text-danger fw-bold " aria-current="page" href="index.html">DOCUMENTACI&#211;N</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold " href="formulario.html">FORMULARIO</a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="col-12">
+
+            <h1 class="text-center text-warning fw-bold">
+                <strong class="text-danger">
+                    API | CRUD
+                </strong> 
+            </h1>
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                <label for="">Elegir Tabla</label>
+                <select class="form-select form-select-sm mb-5" aria-label=".form-select-sm example" id="select-tablas">
+                    <option selected>Seleccione...</option>
+                    <option value="pacientes">Pacientes</option>
+                    <option value="odontologo">Odontologo</option>
+                    <option value="tratamiento">Tratamiento</option>
+                    <option value="consulta">Consulta</option>
+                    <option value="factura">Factura</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- TABLA PACIENTE -->
+        <div class="col-12 " id="div-paciente" >
+            <!-- formulario -->
+            <div class="col-12 my-0 " id="tabla-paci2">
+                <h1 class="text-center text-danger fs-bold mb-4">Paciente</h1>
+                
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input id="paci_id" type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="paci_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="paci_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="paci_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input id="paci_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="paci_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="paci_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-paciente"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                        </svg> Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+
+            </div>
+            <div class="col-6 p-1">
+                <div class="row">
+
+                    <div class="col-6">
+                        <button class="btn btn-primary col-12" id="btn_consultar_todo_paciente">
+                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-warning col-12" id="btn_filtro_paciente">
+                            <i class="bi bi-funnel"></i> Consultar por id 
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- tabla -->
+           <div class="col-12 mt-5">
+                <table id="" class="display table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Identificacion</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>telefono</th>
+                            <th>Descripcion</th>
+                            <th>Correo</th>
+                            <th>Editar / ELiminar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="datos_paci">
+                        
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TABLA ODONTOLOGO -->
+        <div class="col-12" id="div-odontologo" >
+            <!-- formulario -->
+            <div class="col-12 my-0 " id="tabla-odon">
+                <h1 class="text-center text-danger fs-bold mb-4">Odontologo</h1>
+                
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" placeholder="Identificacion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required id="odon_id">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="odon_nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="odon_apellido" type="text" class="form-control" placeholder="Apellido" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="odon_edad" type="number" class="form-control" placeholder="Edad" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input id="odon_direccion" type="text" class="form-control" placeholder="Direccion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="odon_telefono" type="number" class="form-control" placeholder="Telefono" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="odon_correo" type="email" class="form-control" placeholder="Correo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-odontologo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                        </svg> Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="col-6 p-1">
+                <div class="row">
+
+                    <div class="col-6">
+                        <button class="btn btn-primary col-12" id="btn_consultar_todo_odontologo">
+                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-warning col-12" id="btn_filtro_odontologo" >
+                            <i class="bi bi-funnel"></i> Consultar por id 
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- tabla -->
+           <div class="col-12 mt-5">
+            <table id="" class="display table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th >Identificacion</th>
+                        <th >Nombre</th>
+                        <th >Apellido</th>
+                        <th >Edad</th>
+                        <th >telefono</th>
+                        <th >Decripcion</th>
+                        <th >Correo</th>
+                        <th >Editar / ELiminar</th>
+                    </tr>
+                </thead>
+                <tbody class="datos_odo">
+
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <!-- TABLA CONSULTA -->
+        <div class="col-12" id="div-consulta" >
+            <!-- formulario -->
+            <div class="col-12 my-0 " id="tabla-consulta">
+                <h1 class="text-center text-danger fs-bold mb-4">Consulta</h1>
+                
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input id="con_id" type="number" class="form-control" placeholder="ID consulta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="con_fecha" type="date" class="form-control" placeholder="Fecha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="con_paciId" type="text" class="form-control" placeholder="identificacion paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="con_descripcion" type="text" class="form-control" placeholder="Descripcion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="con_odonId" type="text" class="form-control" placeholder="identificacion odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-consulta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                        </svg> Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="col-6 p-1">
+                <div class="row">
+
+                    <div class="col-6">
+                        <button class="btn btn-primary col-12" id="btn_consultar_todo_consulta">
+                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-warning col-12" id="btn_filtro_consulta">
+                            <i class="bi bi-funnel"></i> Consultar por id 
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- tabla Consultas-->
+           <div class="col-12 mt-5">
+            <table id="" class="display table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>ID Paciente</th>
+                        <th>ID Odontologo</th>
+                        <th>Editar / Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody class="datos_con">
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <!-- TABLA TRATAMIENTO -->
+        <div class="col-12" id="div-tratamiento" >
+            <!-- formulario -->
+            <div class="col-12 my-0 ">
+                <h1 class="text-center text-danger fs-bold mb-4">Tratamiento</h1>
+                
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input id="trata_id" type="number" class="form-control" placeholder="ID tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="trata_tipo" type="text" class="form-control" placeholder="Tipo de tratamiento" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="trata_paciId" type="text" class="form-control" placeholder="ID paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 p-1">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary col-12" id="btn_consultar_tratamiento">
+                                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-warning col-12" id="btn_filtro_tratamiento">
+                                            <i class="bi bi-funnel"></i> Consultar por id 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="trata_descri" type="text" class="form-control" placeholder="Descripción" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="trata_precio" type="text" class="form-control" placeholder="Precio" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input id="trata_odonId" type="text" class="form-control" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-tratamiento"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                        </svg> Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            
+
+                <!-- tabla tratamiento-->
+            <div class="col-12 mt-5">
+                <table id="" class="display table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo Tratamiento</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>ID Paciente</th>
+                            <th>ID Odontologo</th>
+                            <th>Editar / Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="datos_trata">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TABLA factura -->
+        <div class="col-12" id="div-factura" >
+            <!-- formulario -->
+            <div class="col-12 my-0 " id="tabla-paci2">
+                <h1 class="text-center text-danger fs-bold mb-4">Factura</h1>
+                
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="number" id="fac_id" class="form-control" placeholder="ID Factura" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="fac_paciId" placeholder="ID Paciente" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="fac_odoId" placeholder="ID Odontologo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <button type="submit" class="btn btn-success col-12" id="btn-crear-factura"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                                        </svg> Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+            </div>
+            <div class="col-6 p-1">
+                <div class="row">
+
+                    <div class="col-6">
+                        <button class="btn btn-primary col-12" id="btn_consultar_todo_factura">
+                            <i class="bi bi-arrow-return-left"></i> Consultar todo 
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-warning col-12" id="btn_filtro_factura">
+                            <i class="bi bi-funnel"></i> Consultar por id 
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+           <!-- tabla -->
+           <div class="col-12 mt-5">
+                <table id="" class="display table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ID paciene</th>
+                            <th>ID Odontologo</th>
+                            <th>Editar / Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="datos_fac">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" ></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script> -->
+    <!-- <script type="text/javascript">
+        $(document).ready(function() {
+            $('table.display').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "sProcessing": "Procesando...",
+                },ordering: false
+                ,
+            });
+        } );
+    </script>    -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/controles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

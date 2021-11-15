@@ -11,19 +11,19 @@ CORS(app)
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'odonedit_V2'
+app.config['MYSQL_DB'] = 'odonultima'
 mysql = MySQL(app)
 
 # settings A partir de ese momento Flask utilizará esta clave para poder cifrar la información de la cookie
 app.secret_key = "mysecretkey"
 
 
-# @app.route('/', methods=['GET'])
-# def ruta():
-    #     index = open("index.html")
-    #     rst = index.read()
-        
-    #     return rst
+@app.route('/', methods=['GET'])
+def ruta():
+    index = open("API/views/index.html")
+    rst = index.read()
+    # rst = {"ruta deel archivo":__file__}
+    return rst
 
 # @app.route('/formulario.html', methods=['GET'])
 # def formulario():
@@ -36,76 +36,122 @@ app.secret_key = "mysecretkey"
 @cross_origin()
 @app.route('/getAll/<tablaName>', methods=['GET'])
 def getAll(tablaName):
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM '+str(tablaName))
-    rv = cur.fetchall()
-    cur.close()
-    payload = [] #lista
-    content = {} #diccionario
-    
-    if (rv):
-        if(tablaName == "odontologo" or tablaName == "paciente"):
+        
+    if(tablaName == "odontologo" or tablaName == "paciente"):
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM '+str(tablaName))
+        rv = cur.fetchall()
+        cur.close()
+        payload = [] #lista
+        content = {} #diccionario
+        if (rv):
             for result in rv:
-                content = {'CC': result[0], 'Nombre': result[1], 'Apellido': result[2], 'Edad': result[3], 'telefono': result[4], 'direccion': result[5], 'correo': result[6], 'Fecha': result[7], 'Estado': result[8]}
+                content = {'id': result[0], 'cc': result[1], 'nombre': result[2], 'apellido': result[3], 'edad': result[4], 'telefono': result[5], 'direccion': result[6], 'correo': result[7], 'fecha': result[8], 'estado': result[9]}
                 payload.append(content)
                 content = {}
-        elif(tablaName == "tratamiento"):
-            for result in rv:
-                content = {'ID': result[0], 'tipoTratamiento': result[1], 'Descripcion': result[2], 'Precio': result[3], 'IdPaciente': result[4], 'IdOdontologo': result[5], 'Fecha': result[6], 'Estado': result[7], 'ConsultaID': result[8]}
-                payload.append(content)
-                content = {}
-        elif(tablaName == "consulta"):
-            for result in rv:
-                content = {'ID': result[0], 'fecha': result[1], 'Descripcion': result[2], 'IdPaciente': result[3], 'IdOdontologo': result[4], 'Fecha': result[5], 'Estado': result[6]}
-                payload.append(content)
-                content = {}
-        elif(tablaName == "factura"):
-            for result in rv:
-                content = {'ID': result[0], 'OdontologoID': result[1], 'PacienteId': result[2], 'Fecha': result[3], 'Estado': result[4], 'ConsultaID': result[5]}
-                payload.append(content)
-                content = {}
+            return jsonify(payload)
 
-        return jsonify(payload)
-    else:
-        return jsonify({"Alerta":"No se encontraron registros!"})
-        # return mensajeTablaSinRegistros(tablaName)
+        else:
+            return jsonify({"Alerta":"No se encontraron registros!"})
+        
+    
+    if(tablaName == "tratamiento"):
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT tratamiento.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON tratamiento.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON tratamiento.odonId = odontologo.odonId INNER JOIN odonultima.consulta ON tratamiento.conId = consulta.conId')
+        rv = cur.fetchall()
+        cur.close()
+        payload = [] #lista
+        content = {} #diccionario
+
+        if(rv):
+            for result in rv:
+                content = {'id': result[0], 'tipoTratamiento': result[1], 'descripcion': result[2], 'precio': result[3], 'idPaciente': result[9], 'idOdontologo': result[10], 'fecha': result[6], 'estado': result[7], 'idConsulta': result[8]}
+                payload.append(content)
+                content = {}
+            return jsonify(payload)
+
+        else:
+            return jsonify({"Alerta":"No se encontraron registros!"})
+        
+    
+    if(tablaName == "consulta"):
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT consulta.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON consulta.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON consulta.odonId = odontologo.odonId')
+        rv = cur.fetchall()
+        cur.close()
+        payload = [] #lista
+        content = {} #diccionario
+
+        if(rv):
+            for result in rv:
+                content = {'id': result[0], 'fecha': result[1], 'descripcion': result[2],'fechaHora': result[3], 'estado': result[4], 'idOdontologo': result[8], 'idPaciente': result[7]}
+                payload.append(content)
+                content = {}
+            return jsonify(payload)
+        else:
+            return jsonify({"Alerta":"No se encontraron registros!"})
+        
+    
+    if(tablaName == "factura"):
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT factura.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON factura.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON factura.odonId = odontologo.odonId INNER JOIN odonultima.consulta ON factura.conId = consulta.conId')
+        rv = cur.fetchall()
+        cur.close()
+        payload = [] #lista
+        content = {} #diccionario
+
+        if(rv):
+            for result in rv:
+                content = {'id': result[0], 'idPaciente': result[6], 'idOdontologo': result[7], 'fecha': result[3], 'estado': result[4], 'idConsulta': result[5]}
+                payload.append(content)
+                content = {}
+            return jsonify(payload)
+        else:
+            return jsonify({"Alerta":"No se encontraron registros!"})
+
+        
+    
     
 
 
 # ruta para consultar todos los registros por parametros (tabla, columna, valor)
 @cross_origin()
-@app.route('/getAllByPar/<table>/<row>/<var>',methods=['GET'])
-def getAllByPar(table,var,row):
+@app.route('/getAllByPar/<table>/<col>/<var>',methods=['GET'])
+def getAllByPar(table,col,var):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM '+str(table)+' WHERE '+str(row)+' like %s', (var, ))
+    cur.execute('SELECT * FROM '+str(table)+' WHERE '+str(col)+' like %s', (var, ))
     rv = cur.fetchall()
     cur.close()
     payload = []
     content = {}
 
-    
-    if(table == "paciente" or table == "odontologo"):
-        for result in rv:
-                content = {'id': result[0], 'nombres': result[1], 'apellidos': result[2], 'edad': result[3], 'telefono': result[4], 'direccion': result[5], 'correo': result[6]}
+    if(rv):
+        if(table == "paciente" or table == "odontologo"):
+            for result in rv:
+                content = {'id': result[0], 'cc': result[1], 'nombre': result[2], 'apellido': result[3], 'edad': result[4], 'telefono': result[5], 'direccion': result[6], 'correo': result[7], 'fecha': result[8], 'estado': result[9]}
                 payload.append(content)
                 content = {}
-    elif(table == "tratamiento"):
-        for result in rv:
-            content = {'ID': result[0], 'tipoTratamiento': result[1], 'Descripcion': result[2], 'Precio': result[3], 'IdPaciente': result[4], 'IdOdontologo': result[5]}
-            payload.append(content)
-            content = {}
-    elif(table == "consulta"):
-        for result in rv:
-            content = {'ID': result[0], 'fecha': result[1], 'Descripcion': result[2], 'IdPaciente': result[3], 'IdOdontologo': result[4]}
-            payload.append(content)
-            content = {}
-    elif(table == "factura"):
-        for result in rv:
-            content = {'ID': result[0], 'OdontologoID': result[1], 'PacienteId': result[2]}
-            payload.append(content)
-            content = {}
-    return jsonify(payload)
-    
+        elif(table == "tratamiento"):
+            for result in rv:
+                content = {'id': result[0], 'tipoTratamiento': result[1], 'descripcion': result[2], 'precio': result[3], 'idPaciente': result[4], 'idOdontologo': result[5], 'fecha': result[6], 'estado': result[7], 'idConsulta': result[8]}
+                payload.append(content)
+                content = {}
+        elif(table == "consulta"):
+            for result in rv:
+                content = {'id': result[0], 'fecha': result[1], 'descripcion': result[2],'fechaHora': result[3], 'estado': result[4], 'idOdontologo': result[5], 'idPaciente': result[6]}
+                payload.append(content)
+                content = {}
+        elif(table == "factura"):
+            for result in rv:
+                content = {'id': result[0], 'idPaciente': result[1], 'idOdontologo': result[2], 'fecha': result[3], 'estado': result[4], 'idConsulta': result[5]}
+                payload.append(content)
+                content = {}
+        return jsonify(payload)
+    else:
+        return jsonify({"Alerta":"No se encontraron registros!"})
 
 
 # ruta para crear un registro
@@ -114,7 +160,7 @@ def getAllByPar(table,var,row):
 def add_registro(tabla):
     if request.method == 'POST':
         if(tabla == "paciente"):
-            cc = request.json['paciId']  
+            cc = request.json['paciDoc']  
             nombre = request.json['paciNombres']        
             apellido = request.json['paciApellido']
             edad = request.json['paciEdad'] 
@@ -122,10 +168,11 @@ def add_registro(tabla):
             direccion = request.json['paciDireccion']
             correo = request.json['paciCorreo']         
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO "+str(tabla)+" (paciId, paciNombres, paciApellido, paciEdad, paciTelefono, paciDireccion, paciCorreo, fechaHora, estado) VALUES (%s,%s,%s,%s,%s,%s,%s, NOW(), 'ACTIVO')", (cc, nombre, apellido,edad ,telefono,direccion,correo))
+            cur.execute("INSERT INTO "+str(tabla)+" (paciDoc,paciNombres,paciApellido,paciEdad,paciTelefono,paciDireccion,paciCorreo,fechaHora) VALUES (%s,%s,%s,%s,%s,%s,%s,NOW())", (cc,nombre,apellido,edad,telefono,direccion,correo))
             mysql.connection.commit() #Es necesario realizar los cambios, de lo contrario no se realizarán cambios en la tabla
-        if(tabla == "odontologo"):
-            cc = request.json['odonId']  
+            return jsonify({"Alerta":"Registro existoso!"})
+        elif(tabla == "odontologo"):
+            cc = request.json['odonDoc']  
             nombre = request.json['odoNombres']        
             apellido = request.json['odoApellido']
             edad = request.json['odoEdad'] 
@@ -133,9 +180,10 @@ def add_registro(tabla):
             direccion = request.json['odoDireccion']
             correo = request.json['odoCorreo']         
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO "+str(tabla)+" (odonId, odoNombres, odoApellido, odoEdad, odoTelefono, odoDireccion, odoCorreo, fechaHora, estado) VALUES (%s,%s,%s,%s,%s,%s,%s, NOW(), 'ACTIVO')", (cc, nombre,apellido,edad,telefono,direccion,correo))
+            cur.execute("INSERT INTO "+str(tabla)+" (odonDoc,odoNombres,odoApellido,odoEdad,odoTelefono,odoDireccion,odoCorreo,fechaHora) VALUES (%s,%s,%s,%s,%s,%s,%s, NOW())", (cc, nombre,apellido,edad,telefono,direccion,correo))
             mysql.connection.commit() #Es necesario realizar los cambios, de lo contrario no se realizarán cambios en la tabla
-        if(tabla == "tratamiento"): 
+            return jsonify({"Alerta":"Registro existoso!"})
+        elif(tabla == "tratamiento"): 
             tipo = request.json['tipoTrata']        
             desc = request.json['trataDescri']
             pre = request.json['trataPrecio'] 
@@ -143,25 +191,27 @@ def add_registro(tabla):
             odoid = request.json['odonId']        
             conId = request.json['conId']        
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO "+str(tabla)+" (tipoTrata, trataDescri, trataPrecio, paciId, odonId, fechaHora, estado, conId) VALUES (%s,%s,%s,%s,%s, NOW(), 'ACTIVO',%s)", (tipo, desc,pre,pasid,odoid, conId))
+            cur.execute("INSERT INTO "+str(tabla)+" (tipoTrata,trataDescri,trataPrecio,paciId,odonId,fechaHora,conId) VALUES (%s,%s,%s,%s,%s, NOW(),%s)", (tipo,desc,pre,pasid,odoid,conId))
             mysql.connection.commit() #Es necesario realizar los cambios, de lo contrario no se realizarán cambios en la tabla
-        if(tabla == "consulta"): 
+            return jsonify({"Alerta":"Registro existoso!"})
+        elif(tabla == "consulta"): 
             fecha = request.json['conFecha']        
             desc = request.json['conDescri']
             odoid = request.json['odonId']        
             pasid = request.json['paciId'] 
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO "+str(tabla)+" (conFecha, conDescri, odonId, paciId, fechaHora, estado) VALUES (%s,%s,%s,%s, NOW(), 'ACTIVO')", (fecha, desc,pasid,odoid))
+            cur.execute("INSERT INTO "+str(tabla)+" (conFecha,conDescri,fechaHora,odonId,paciId) VALUES (%s,%s,NOW(),%s,%s)", (fecha,desc,odoid,pasid))
             mysql.connection.commit() #Es necesario realizar los cambios, de lo contrario no se realizarán cambios en la tabla
-        if(tabla == "factura"):
+            return jsonify({"Alerta":"Registro existoso!"})
+        elif(tabla == "factura"):
             odoid = request.json['odonId']        
             pasid = request.json['paciId'] 
             conId = request.json['conId']        
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO "+str(tabla)+" (odonId, paciId, fechaHora, estado, conId) VALUES (%s,%s, NOW(), 'ACTIVO',%s)", (odoid,pasid,conId))
+            cur.execute("INSERT INTO "+str(tabla)+" (odonId,paciId,fechaHora,conId) VALUES (%s,%s, NOW(),%s)", (odoid,pasid,conId))
             mysql.connection.commit() #Es necesario realizar los cambios, de lo contrario no se realizarán cambios en la tabla
+            return jsonify({"Alerta":"Registro existoso!"})
         # return mensajeRegistroExitoso(tabla)
-        return jsonify({"Alerta":"Registro existoso!"})
         # return jsonify({"Alerta": mensajeRegistroExitoso(tabla)})
 
 
@@ -171,7 +221,7 @@ def add_registro(tabla):
 @app.route('/update_contact/<tabla>/<dato>', methods=['PUT'])
 def update_contact(tabla, dato):
         if(tabla == "paciente"):
-            cc = request.json['paciId']  
+            cc = request.json['paciDoc']  
             nombre = request.json['paciNombres']        
             apellido = request.json['paciApellido']
             edad = request.json['paciEdad'] 
@@ -179,10 +229,10 @@ def update_contact(tabla, dato):
             direccion = request.json['paciDireccion']
             correo = request.json['paciCorreo']
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE "+str(tabla)+" SET paciId = %s, paciNombres = %s, paciApellido = %s, paciEdad = %s,paciTelefono = %s, paciDireccion = %s, paciCorreo = %s, fechaHora = NOW() WHERE paciId = %s", (cc, nombre, apellido, edad,telefono,direccion,correo, str(dato)))
+            cur.execute("UPDATE "+str(tabla)+" SET paciDoc = %s, paciNombres = %s, paciApellido = %s, paciEdad = %s,paciTelefono = %s, paciDireccion = %s, paciCorreo = %s, fechaHora = NOW() WHERE paciId = %s", (cc,nombre, apellido,edad,telefono,direccion,correo, str(dato)))
             mysql.connection.commit()
         elif(tabla == "odontologo"):
-            cc = request.json['odonId']  
+            cc = request.json['odonDoc']  
             nombre = request.json['odoNombres']        
             apellido = request.json['odoApellido']
             edad = request.json['odoEdad'] 
@@ -190,7 +240,7 @@ def update_contact(tabla, dato):
             direccion = request.json['odoDireccion']
             correo = request.json['odoCorreo']
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE "+str(tabla)+" SET odonId = %s, odoNombres = %s, odoApellido = %s, odoEdad = %s,odoTelefono =%s, odoDireccion =%s, odoCorreo = %s, fechaHora = NOW() WHERE odonId = %s", (cc, nombre, apellido, edad,telefono,direccion,correo, str(dato)))
+            cur.execute("UPDATE "+str(tabla)+" SET odonDoc = %s, odoNombres = %s, odoApellido = %s, odoEdad = %s,odoTelefono =%s, odoDireccion =%s, odoCorreo = %s, fechaHora = NOW() WHERE odonId = %s", (cc,nombre,apellido,edad,telefono,direccion,correo, str(dato)))
             mysql.connection.commit()
         elif(tabla == "tratamiento"):
             tipoTrata = request.json['tipoTrata']        
