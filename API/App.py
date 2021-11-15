@@ -11,7 +11,7 @@ CORS(app)
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'odonultima'
+app.config['MYSQL_DB'] = 'centro_odontologico_bd'
 mysql = MySQL(app)
 
 # settings A partir de ese momento Flask utilizará esta clave para poder cifrar la información de la cookie
@@ -58,7 +58,7 @@ def getAll(tablaName):
     if(tablaName == "tratamiento"):
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT tratamiento.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON tratamiento.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON tratamiento.odonId = odontologo.odonId INNER JOIN odonultima.consulta ON tratamiento.conId = consulta.conId')
+        cur.execute('SELECT tratamiento.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN centro_odontologico_bd.paciente ON tratamiento.paciId = paciente.paciId INNER JOIN centro_odontologico_bd.odontologo ON tratamiento.odonId = odontologo.odonId INNER JOIN centro_odontologico_bd.consulta ON tratamiento.conId = consulta.conId')
         rv = cur.fetchall()
         cur.close()
         payload = [] #lista
@@ -78,7 +78,7 @@ def getAll(tablaName):
     if(tablaName == "consulta"):
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT consulta.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON consulta.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON consulta.odonId = odontologo.odonId')
+        cur.execute('SELECT consulta.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN centro_odontologico_bd.paciente ON consulta.paciId = paciente.paciId INNER JOIN centro_odontologico_bd.odontologo ON consulta.odonId = odontologo.odonId')
         rv = cur.fetchall()
         cur.close()
         payload = [] #lista
@@ -97,7 +97,7 @@ def getAll(tablaName):
     if(tablaName == "factura"):
 
         cur = mysql.connection.cursor()
-        cur.execute('SELECT factura.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN odonultima.paciente ON factura.paciId = paciente.paciId INNER JOIN odonultima.odontologo ON factura.odonId = odontologo.odonId INNER JOIN odonultima.consulta ON factura.conId = consulta.conId')
+        cur.execute('SELECT factura.*, paciente.paciDoc, odontologo.odonDoc FROM '+str(tablaName)+' INNER JOIN centro_odontologico_bd.paciente ON factura.paciId = paciente.paciId INNER JOIN centro_odontologico_bd.odontologo ON factura.odonId = odontologo.odonId INNER JOIN centro_odontologico_bd.consulta ON factura.conId = consulta.conId')
         rv = cur.fetchall()
         cur.close()
         payload = [] #lista
